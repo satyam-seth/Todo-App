@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-2">Add Item</h2>
+    <form action="add_todo/" method="post" class="form-inline">
+        {% csrf_token %}
+        <input type="text" name="content" class="form-control mr-2 mb-2" placeholder="type hear...">
+        <button type="submit" class="mb-2 btn btn-primary">Submit</button>
+    </form>
+</div>
+<div class="container mt-4">
+    <ul class="list-group">
+        {% for todo_item in todo_items %}
+            <li class="list-group-item">{{todo_item.text}}
+                <div class="float-right ml-1">
+                    <form action="delete_todo/{{todo_item.id}}/">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+      </ul>
+</div>
+{% endblock content %}
